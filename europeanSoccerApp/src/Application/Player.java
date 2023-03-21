@@ -24,7 +24,7 @@ public class Player {
 	 * @param position = player's position.
 	 * @param nationalTeam = current country the player represents.
 	 * @param currTeam = current club.
-	 * @param marketValue = actual market value. */
+	 * @param marketValue = actual market value (in millions) */
 	public Player(String name, String age, String position, String nationalTeam, String currTeam, double marketValue) {
 		this.name = name;
 		this.age = age;
@@ -86,7 +86,7 @@ public class Player {
 	
 	//toString
 	public String toString() {
-		return String.format("Name: %s|Age: %s|Position: %s|National Team: %s|Current Team: %s|Market Value: %d", this.name, this.age,
+		return String.format("Name: %s|Age: %s|Position: %s|National Team: %s|Current Team: %s|Market Value: %f", this.name, this.age,
 				this.position, this.nationalTeam, this.currTeam, this.marketValue);
 	}
 	
