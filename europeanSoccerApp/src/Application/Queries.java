@@ -120,5 +120,86 @@ public class Queries {
 		return sublist;
 	}
 	
+	public ArrayList<Player> searchByAge(String age){
+		if(age == null) {return null;}
+		sortByAge(this.foundPlayers);
+		//Some type of binary search
+		int leftIdx = 0;
+		int rightIdx = this.foundPlayers.size() - 1;
+		int midIdx = leftIdx + (rightIdx - leftIdx) / 2;
+		boolean found = false;
+		ArrayList<Player> sublist = new ArrayList<Player>();
+		while(leftIdx <= rightIdx && found == false) {
+			if(age.equals(this.foundPlayers.get(midIdx).getAge())) {
+				found = true;
+				sublist.add(this.foundPlayers.get(midIdx));
+			}
+			else {
+				if(age.compareTo(this.foundPlayers.get(midIdx).getAge()) > 0) {
+					leftIdx = midIdx + 1;
+				}
+				else {
+					rightIdx = midIdx - 1;
+				}
+				midIdx = leftIdx + (rightIdx - leftIdx) / 2;
+			}
+		}
+		if(found == false) {return null;}
+		//Left Traversal
+		int leftLimit = midIdx - 1;
+		while(leftLimit >= 0 && age.equals(this.foundPlayers.get(leftLimit).getAge())) {
+			sublist.add(this.foundPlayers.get(leftLimit));
+			leftLimit--;
+		}
+		//Right Traversal
+		int rightLimit = midIdx + 1;
+		while(rightLimit < this.foundPlayers.size() && age.equals(this.foundPlayers.get(rightLimit).getAge())) {
+			sublist.add(this.foundPlayers.get(rightLimit));
+			rightLimit++;
+		}
+		sortByAge(sublist);
+		return sublist;
+	}
+	
+	public ArrayList<Player> searchByPosition(String pos){
+		if(pos == null) {return null;}
+		sortByPosition(this.foundPlayers);
+		//Some type of binary search
+		int leftIdx = 0;
+		int rightIdx = this.foundPlayers.size() - 1;
+		int midIdx = leftIdx + (rightIdx - leftIdx) / 2;
+		boolean found = false;
+		ArrayList<Player> sublist = new ArrayList<Player>();
+		while(leftIdx <= rightIdx && found == false) {
+			if(pos.equals(this.foundPlayers.get(midIdx).getPosition())) {
+				found = true;
+				sublist.add(this.foundPlayers.get(midIdx));
+			}
+			else {
+				if(pos.compareTo(this.foundPlayers.get(midIdx).getPosition()) > 0) {
+					leftIdx = midIdx + 1;
+				}
+				else {
+					rightIdx = midIdx - 1;
+				}
+				midIdx = leftIdx + (rightIdx - leftIdx) / 2;
+			}
+		}
+		if(found == false) {return null;}
+		//Left Traversal
+		int leftLimit = midIdx - 1;
+		while(leftLimit >= 0 && pos.equals(this.foundPlayers.get(leftLimit).getPosition())) {
+			sublist.add(this.foundPlayers.get(leftLimit));
+			leftLimit--;
+		}
+		//Right Traversal
+		int rightLimit = midIdx + 1;
+		while(rightLimit < this.foundPlayers.size() && pos.equals(this.foundPlayers.get(rightLimit).getPosition())) {
+			sublist.add(this.foundPlayers.get(rightLimit));
+			rightLimit++;
+		}
+		sortByPosition(sublist);
+		return sublist;
+	}
 	
 }
