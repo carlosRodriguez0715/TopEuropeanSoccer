@@ -157,7 +157,7 @@ public class Queries {
 			sublist.add(this.foundPlayers.get(rightLimit));
 			rightLimit++;
 		}
-		sortByAge(sublist);
+		sortByName(sublist);
 		return sublist;
 	}
 	
@@ -198,7 +198,7 @@ public class Queries {
 			sublist.add(this.foundPlayers.get(rightLimit));
 			rightLimit++;
 		}
-		sortByPosition(sublist);
+		sortByName(sublist);
 		return sublist;
 	}
 	
