@@ -19,7 +19,7 @@ public class Queries {
 		try {
 			this.foundPlayers = new ArrayList<Player>();
 			registerPlayersFromCSV();
-			sortByName();
+			sortByName(this.foundPlayers);
 		}
 		catch(IOException e) {
 			System.out.println("File 'players.CSV' not found, program can no longer run.");
@@ -63,34 +63,35 @@ public class Queries {
 		br.close();
 	}
 	
-	private void sortByTeam() {
-		this.foundPlayers.sort((o1, o2) -> o1.getCurrTeam().compareTo(o2.getCurrTeam()));
+	private void sortByTeam(ArrayList<Player> al) {
+		al.sort((o1, o2) -> o1.getCurrTeam().compareTo(o2.getCurrTeam()));
 	}
 	
-	private void sortByAge() {
-		this.foundPlayers.sort((o1, o2) -> o1.getAge().compareTo(o2.getAge()));
+	private void sortByAge(ArrayList<Player> al) {
+		al.sort((o1, o2) -> o1.getAge().compareTo(o2.getAge()));
 	}
 	
-	private void sortByPosition() {
-		this.foundPlayers.sort((o1, o2) -> o1.getPosition().compareTo(o2.getPosition()));
+	private void sortByPosition(ArrayList<Player> al) {
+		al.sort((o1, o2) -> o1.getPosition().compareTo(o2.getPosition()));
 	}
 	
-	private void sortByName() {
-		this.foundPlayers.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+	private void sortByName(ArrayList<Player> al) {
+		al.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
 	}
 	
 	public ArrayList<Player> searchByTeam(String team){
 		if(team == null) {return null;}
-		sortByTeam();
+		sortByTeam(this.foundPlayers);
 		//Some type of binary search
 		int leftIdx = 0;
 		int rightIdx = this.foundPlayers.size() - 1;
+		int midIdx = leftIdx + (rightIdx - leftIdx) / 2;
 		boolean found = false;
 		ArrayList<Player> sublist = new ArrayList<Player>();
 		while(leftIdx <= rightIdx && found == false) {
-			int midIdx = leftIdx + (rightIdx - leftIdx) / 2;
 			if(team.equals(this.foundPlayers.get(midIdx).getCurrTeam())) {
 				found = true;
+				sublist.add(this.foundPlayers.get(midIdx));
 			}
 			else {
 				if(team.compareTo(this.foundPlayers.get(midIdx).getCurrTeam()) > 0) {
@@ -99,12 +100,23 @@ public class Queries {
 				else {
 					rightIdx = midIdx - 1;
 				}
+				midIdx = leftIdx + (rightIdx - leftIdx) / 2;
 			}
 		}
 		if(found == false) {return null;}
 		//Left Traversal
-		
+		int leftLimit = midIdx - 1;
+		while(leftLimit > 0 && team.equals(this.foundPlayers.get(leftLimit).getCurrTeam())) {
+			sublist.add(this.foundPlayers.get(leftLimit));
+			leftLimit--;
+		}
 		//Right Traversal
+		int rightLimit = midIdx + 1;
+		while(rightLimit < this.foundPlayers.size() && team.equals(this.foundPlayers.get(rightLimit).getCurrTeam())) {
+			sublist.add(this.foundPlayers.get(rightLimit));
+			rightLimit++;
+		}
+		sortByName(sublist);
 		return sublist;
 	}
 	
