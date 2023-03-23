@@ -16,16 +16,16 @@ public class Queries {
 	
 	//Default Constructor
 	public Queries() {
-		try {
+		//try {
 			this.foundPlayers = new ArrayList<Player>();
-			registerPlayersFromCSV();
+			//registerPlayersFromCSV();
 			sortByName(this.foundPlayers);
-		}
-		catch(IOException e) {
+		//}
+		/*catch(IOException e) {
 			System.out.println("File 'players.CSV' not found, program can no longer run.");
 			e.printStackTrace();
 			System.exit(0);
-		}
+		}*/
 	}
 
 	//Gets the list of all players
@@ -106,7 +106,7 @@ public class Queries {
 		if(found == false) {return null;}
 		//Left Traversal
 		int leftLimit = midIdx - 1;
-		while(leftLimit > 0 && team.equals(this.foundPlayers.get(leftLimit).getCurrTeam())) {
+		while(leftLimit >= 0 && team.equals(this.foundPlayers.get(leftLimit).getCurrTeam())) {
 			sublist.add(this.foundPlayers.get(leftLimit));
 			leftLimit--;
 		}
