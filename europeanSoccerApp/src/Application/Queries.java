@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Queries {
 	//Stores all players.
@@ -18,9 +19,10 @@ public class Queries {
 		try {
 			this.foundPlayers = new ArrayList<Player>();
 			registerPlayersFromCSV();
+			sortByName();
 		}
 		catch(IOException e) {
-			System.out.println("File 'players.CSV' not found, program can no longer run");
+			System.out.println("File 'players.CSV' not found, program can no longer run.");
 			e.printStackTrace();
 			System.exit(0);
 		}
@@ -61,18 +63,50 @@ public class Queries {
 		br.close();
 	}
 	
-	public void sortByTeam() {
+	private void sortByTeam() {
 		this.foundPlayers.sort((o1, o2) -> o1.getCurrTeam().compareTo(o2.getCurrTeam()));
 	}
 	
-	public void sortByAge() {
+	private void sortByAge() {
 		this.foundPlayers.sort((o1, o2) -> o1.getAge().compareTo(o2.getAge()));
 	}
 	
-	public void sortByPosition() {
+	private void sortByPosition() {
 		this.foundPlayers.sort((o1, o2) -> o1.getPosition().compareTo(o2.getPosition()));
 	}
 	
-
+	private void sortByName() {
+		this.foundPlayers.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+	}
+	
+	public ArrayList<Player> searchByTeam(String team){
+		if(team == null) {return null;}
+		sortByTeam();
+		//Some type of binary search
+		int leftIdx = 0;
+		int rightIdx = this.foundPlayers.size() - 1;
+		boolean found = false;
+		ArrayList<Player> sublist = new ArrayList<Player>();
+		while(leftIdx <= rightIdx && found == false) {
+			int midIdx = leftIdx + (rightIdx - leftIdx) / 2;
+			if(team.equals(this.foundPlayers.get(midIdx).getCurrTeam())) {
+				found = true;
+			}
+			else {
+				if(team.compareTo(this.foundPlayers.get(midIdx).getCurrTeam()) > 0) {
+					leftIdx = midIdx + 1;
+				}
+				else {
+					rightIdx = midIdx - 1;
+				}
+			}
+		}
+		if(found == false) {return null;}
+		//Left Traversal
+		
+		//Right Traversal
+		return sublist;
+	}
+	
 	
 }
