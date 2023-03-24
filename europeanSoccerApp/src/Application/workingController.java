@@ -13,7 +13,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class workingController implements Initializable{
+public class workingController extends Thread implements Initializable{
+	
+	private Queries q;
 	
 	@FXML
 	private TextField searchBar;
@@ -26,8 +28,6 @@ public class workingController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public void displayFound() {
@@ -42,6 +42,11 @@ public class workingController implements Initializable{
 	}
 	
 	public void showPChoices() {
+		
+	}
+	
+	@Override
+	public void run() {
 		
 	}
 	
