@@ -16,7 +16,7 @@ public class Queries extends Thread{
 	
 	//Default Constructor
 	public Queries() {
-		run();
+		start();
 	}
 
 	//Gets the list of all players
