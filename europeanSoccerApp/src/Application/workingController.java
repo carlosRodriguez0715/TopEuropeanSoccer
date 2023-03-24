@@ -24,6 +24,12 @@ public class workingController implements Initializable{
 	@FXML
 	private TextArea printArea;
 	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public void displayFound() {
 		
 	}
@@ -36,12 +42,6 @@ public class workingController implements Initializable{
 	}
 	
 	public void showPChoices() {
-		
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		
 	}
 	
