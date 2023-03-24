@@ -10,22 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Queries {
+public class Queries extends Thread{
 	//Stores all players.
 	private ArrayList<Player> foundPlayers;
 	
 	//Default Constructor
 	public Queries() {
-		//try {
-			this.foundPlayers = new ArrayList<Player>();
-			//registerPlayersFromCSV();
-			sortByName(this.foundPlayers);
-		//}
-		/*catch(IOException e) {
-			System.out.println("File 'players.CSV' not found, program can no longer run.");
-			e.printStackTrace();
-			System.exit(0);
-		}*/
+		run();
 	}
 
 	//Gets the list of all players
@@ -201,5 +192,20 @@ public class Queries {
 		sortByName(sublist);
 		return sublist;
 	}
+	
+	@Override
+	public void run() {
+		//try {
+		this.foundPlayers = new ArrayList<Player>();
+		//registerPlayersFromCSV();
+		sortByName(this.foundPlayers);
+	//}
+	/*catch(IOException e) {
+		System.out.println("File 'players.CSV' not found, program can no longer run.");
+		e.printStackTrace();
+		System.exit(0);
+	}*/
+	}
+	
 	
 }
