@@ -11,9 +11,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("WorkingSc.fxml"));
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("WelcomeSc.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
