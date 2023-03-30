@@ -10,15 +10,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Queries extends Thread{
+public class Queries {
 	//Stores all players.
 	private ArrayList<Player> foundPlayers;
 	
 	//Default Constructor
 	public Queries() {
 		this.foundPlayers = new ArrayList<Player>();
-		start();
-		sortByName(this.foundPlayers);
+		try {
+			registerPlayersFromCSV();
+			sortByName(this.foundPlayers);
+		} catch (IOException e) {
+			System.out.println("File 'premCSV.csv' not found, program can no longer run.");
+			e.printStackTrace();
+			System.exit(0);
+		}
 	}
 
 	//Gets the list of all players
@@ -49,7 +55,6 @@ public class Queries extends Thread{
 	
 	private void sortByTeam(ArrayList<Player> al) {
 		al.sort((o1, o2) -> o1.getCurrTeam().compareTo(o2.getCurrTeam()));
-		System.out.println(al.size());
 	}
 	
 	private void sortByAge(ArrayList<Player> al) {
@@ -74,7 +79,6 @@ public class Queries extends Thread{
 		boolean found = false;
 		ArrayList<Player> sublist = new ArrayList<Player>();
 		while(leftIdx <= rightIdx && found == false) {
-			System.out.println(this.foundPlayers.get(midIdx).toString());
 			if(team.equals(this.foundPlayers.get(midIdx).getCurrTeam())) {
 				found = true;
 				sublist.add(this.foundPlayers.get(midIdx));
@@ -187,18 +191,4 @@ public class Queries extends Thread{
 		sortByName(sublist);
 		return sublist;
 	}
-	
-	@Override
-	public void run() {
-		try {
-			registerPlayersFromCSV();
-		}
-		catch(IOException e) {
-			System.out.println("File 'premCSV.csv' not found, program can no longer run.");
-			e.printStackTrace();
-			System.exit(0);
-		}
-	}
-	
-	
 }
