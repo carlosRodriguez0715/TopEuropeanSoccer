@@ -9,8 +9,8 @@
    <children>
       <TextField fx:id="searchBar" layoutX="340.0" layoutY="115.0" onAction="#displayFound" prefHeight="35.0" prefWidth="325.0" />
       <TextArea fx:id="printArea" layoutX="294.0" layoutY="188.0" prefHeight="339.0" prefWidth="417.0" />
-      <ChoiceBox fx:id="teamChoice" layoutX="54.0" layoutY="240.0" onMouseClicked="#showTChoices" prefWidth="150.0" />
-      <ChoiceBox fx:id="ageChoices" layoutX="54.0" layoutY="342.0" onMouseClicked="#showAChoices" prefWidth="150.0" />
-      <ChoiceBox fx:id="positionChoices" layoutX="54.0" layoutY="455.0" onMouseClicked="#showPChoices" prefWidth="150.0" />
+      <ChoiceBox fx:id="team" layoutX="54.0" layoutY="240.0" onMouseClicked="#showTChoices" prefWidth="150.0" />
+      <ChoiceBox fx:id="age" layoutX="54.0" layoutY="342.0" onMouseClicked="#showAChoices" prefWidth="150.0" />
+      <ChoiceBox fx:id="position" layoutX="54.0" layoutY="455.0" onMouseClicked="#showPChoices" prefWidth="150.0" />
    </children>
 </AnchorPane>

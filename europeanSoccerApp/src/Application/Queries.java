@@ -16,7 +16,9 @@ public class Queries extends Thread{
 	
 	//Default Constructor
 	public Queries() {
+		this.foundPlayers = new ArrayList<Player>();
 		start();
+		sortByName(this.foundPlayers);
 	}
 
 	//Gets the list of all players
@@ -30,25 +32,16 @@ public class Queries extends Thread{
 	}
 	
 	private void registerPlayersFromCSV() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader("players.CSV"));
+		BufferedReader br = new BufferedReader(new FileReader("src/premCSV.csv"));
 		String read = br.readLine();
 		if(read == null) {br.close(); throw new IOException();}
 		else {
-			String[] data = read.split(",");
-			if(data.length < 6) {System.out.println("Missing data, exiting program."); System.exit(0);}
-			Player pl = new Player(data[0], data[1], data[2], data[3], data[4], Double.parseDouble(data[5]));
-			foundPlayers.add(pl);
-			
-			while((read = br.readLine()) != null) {
+			String[] data = null;
+			while(read != null) {
 				data = read.split(",");
-				if(data.length < 6) {System.out.println("Missing data, exiting program."); System.exit(0);}
-				pl.setName(data[0]);
-				pl.setAge(data[1]);
-				pl.setPosition(data[2]);
-				pl.setNationalTeam(data[3]);
-				pl.setCurrTeam(data[4]);
-				pl.setMarketValue(Double.parseDouble(data[5]));
-				foundPlayers.add(pl);
+				Player pl = new Player(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim(), data[4].trim(), Double.parseDouble(data[5]));
+				this.foundPlayers.add(pl);
+				read = br.readLine();
 			}
 		}
 		br.close();
@@ -56,6 +49,7 @@ public class Queries extends Thread{
 	
 	private void sortByTeam(ArrayList<Player> al) {
 		al.sort((o1, o2) -> o1.getCurrTeam().compareTo(o2.getCurrTeam()));
+		System.out.println(al.size());
 	}
 	
 	private void sortByAge(ArrayList<Player> al) {
@@ -71,7 +65,7 @@ public class Queries extends Thread{
 	}
 	
 	public ArrayList<Player> searchByTeam(String team){
-		if(team == null) {return null;}
+		if(team == null || team.isBlank()) {return null;}
 		sortByTeam(this.foundPlayers);
 		//Some type of binary search
 		int leftIdx = 0;
@@ -80,6 +74,7 @@ public class Queries extends Thread{
 		boolean found = false;
 		ArrayList<Player> sublist = new ArrayList<Player>();
 		while(leftIdx <= rightIdx && found == false) {
+			System.out.println(this.foundPlayers.get(midIdx).toString());
 			if(team.equals(this.foundPlayers.get(midIdx).getCurrTeam())) {
 				found = true;
 				sublist.add(this.foundPlayers.get(midIdx));
@@ -195,16 +190,14 @@ public class Queries extends Thread{
 	
 	@Override
 	public void run() {
-		//try {
-		this.foundPlayers = new ArrayList<Player>();
-		//registerPlayersFromCSV();
-		sortByName(this.foundPlayers);
-	//}
-	/*catch(IOException e) {
-		System.out.println("File 'players.CSV' not found, program can no longer run.");
-		e.printStackTrace();
-		System.exit(0);
-	}*/
+		try {
+			registerPlayersFromCSV();
+		}
+		catch(IOException e) {
+			System.out.println("File 'premCSV.csv' not found, program can no longer run.");
+			e.printStackTrace();
+			System.exit(0);
+		}
 	}
 	
 	

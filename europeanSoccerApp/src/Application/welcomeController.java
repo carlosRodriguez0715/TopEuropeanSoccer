@@ -48,7 +48,6 @@ public class welcomeController implements Initializable {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("WorkingSc.fxml"));
 		this.root = loader.load();
 		workingController wC = loader.getController();
-		wC.initialize(null, null);
 		this.stage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
 		this.scene = new Scene(root);
 		this.stage.setScene(scene);
