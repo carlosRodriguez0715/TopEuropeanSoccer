@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #00c9b9" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.workingController">
+<AnchorPane fx:id="bgPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #00c9b9" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.workingController">
    <children>
-      <TextField fx:id="searchBar" layoutX="340.0" layoutY="115.0" onAction="#displayFound" prefHeight="35.0" prefWidth="325.0" />
-      <TextArea fx:id="printArea" layoutX="294.0" layoutY="188.0" prefHeight="339.0" prefWidth="417.0" />
-      <ChoiceBox fx:id="team" layoutX="54.0" layoutY="240.0" onMouseClicked="#showTChoices" prefWidth="150.0" />
-      <ChoiceBox fx:id="age" layoutX="54.0" layoutY="342.0" onMouseClicked="#showAChoices" prefWidth="150.0" />
-      <ChoiceBox fx:id="position" layoutX="54.0" layoutY="455.0" onMouseClicked="#showPChoices" prefWidth="150.0" />
+      <TextField fx:id="searchBar" layoutX="340.0" layoutY="115.0" prefHeight="35.0" prefWidth="325.0" />
+      <TextArea fx:id="printArea" editable="false" layoutX="294.0" layoutY="188.0" prefHeight="339.0" prefWidth="417.0" />
+      <ComboBox fx:id="teams" layoutX="54.0" layoutY="100" prefWidth="150.0" />
+      <ComboBox fx:id="age" layoutX="54.0" layoutY="269.0" prefWidth="150.0" />
+      <ComboBox fx:id="position" layoutX="54.0" layoutY="395.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

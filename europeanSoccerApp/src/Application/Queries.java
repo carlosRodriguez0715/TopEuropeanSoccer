@@ -157,7 +157,7 @@ public class Queries {
 		//Some type of binary search
 		int leftIdx = 0;
 		int rightIdx = this.foundPlayers.size() - 1;
-		int midIdx = leftIdx + (rightIdx - leftIdx) / 2;
+		int midIdx = leftIdx + (rightIdx - leftIdx) / 2; 
 		boolean found = false;
 		ArrayList<Player> sublist = new ArrayList<Player>();
 		while(leftIdx <= rightIdx && found == false) {
