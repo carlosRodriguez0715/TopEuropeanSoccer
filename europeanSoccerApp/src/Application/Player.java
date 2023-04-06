@@ -86,7 +86,7 @@ public class Player {
 	
 	//toString
 	public String toString() {
-		return String.format("Name: %s|Age: %s|Position: %s|National Team: %s|Current Team: %s|Market Value: %f", this.name, this.age,
+		return String.format("Name: %s|Age: %s|Position: %s|National Team: %s|Current Team: %s|Market Value(in millions of Euros): %f", this.name, this.age,
 				this.position, this.nationalTeam, this.currTeam, this.marketValue);
 	}
 	

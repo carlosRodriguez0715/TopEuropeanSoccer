@@ -191,4 +191,45 @@ public class Queries {
 		sortByName(sublist);
 		return sublist;
 	}
+	
+	public ArrayList<Player> searchByName(String name){
+		if(name == null) {return null;}
+		sortByName(this.foundPlayers);
+		//Some type of binary search
+		int leftIdx = 0;
+		int rightIdx = this.foundPlayers.size() - 1;
+		int midIdx = leftIdx + (rightIdx - leftIdx) / 2; 
+		boolean found = false;
+		ArrayList<Player> sublist = new ArrayList<Player>();
+		while(leftIdx <= rightIdx && found == false) {
+			if(name.equals(this.foundPlayers.get(midIdx).getName())) {
+				found = true;
+				sublist.add(this.foundPlayers.get(midIdx));
+			}
+			else {
+				if(name.compareTo(this.foundPlayers.get(midIdx).getName()) > 0) {
+					leftIdx = midIdx + 1;
+				}
+				else {
+					rightIdx = midIdx - 1;
+				}
+				midIdx = leftIdx + (rightIdx - leftIdx) / 2;
+			}
+		}
+		if(found == false) {return null;}
+		//Left Traversal
+		int leftLimit = midIdx - 1;
+		while(leftLimit >= 0 && name.equals(this.foundPlayers.get(leftLimit).getName())) {
+			sublist.add(this.foundPlayers.get(leftLimit));
+			leftLimit--;
+		}
+		//Right Traversal
+		int rightLimit = midIdx + 1;
+		while(rightLimit < this.foundPlayers.size() && name.equals(this.foundPlayers.get(rightLimit).getName())) {
+			sublist.add(this.foundPlayers.get(rightLimit));
+			rightLimit++;
+		}
+		sortByName(sublist);
+		return sublist;
+	}
 }
