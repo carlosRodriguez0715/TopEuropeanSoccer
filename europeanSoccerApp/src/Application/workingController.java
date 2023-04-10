@@ -82,6 +82,15 @@ public class workingController {
 					 this.printArea.clear();
 					 this.results.clear();
 				 }
+				 else if(value.equals("-") && (!this.age.getValue().equals("-") || this.age.getValue() != null || this.position.getValue().equals("-") || this.position.getValue() != null)) {
+					 this.printArea.clear();
+					 if(!this.age.getValue().equals("-") && this.age.getValue() != null) {
+						 searchAge();
+					 }
+					 if(!this.position.getValue().equals("-") && this.position.getValue() != null) {
+						 searchPosition();
+					 }
+				 }
 				 else {
 					 if(this.results.isEmpty() || (this.age.getValue() == null || this.age.getValue().equals("-")) && (this.position.getValue() == null || this.position.getValue().equals("-"))) {
 						 this.results = this.q.searchByTeam(value);
@@ -114,6 +123,15 @@ public class workingController {
 				 if(value.equals("-") && (this.teams.getValue() == null || this.teams.getValue().equals("-")) && (this.position.getValue() == null || this.position.getValue().equals("-"))) {
 					 this.printArea.clear();
 					 this.results.clear();
+				 }
+				 else if(value.equals("-") && (!this.teams.getValue().equals("-") || this.teams.getValue() != null || this.position.getValue().equals("-") || this.position.getValue() != null)) {
+					 this.printArea.clear();
+					 if(!this.teams.getValue().equals("-") && this.teams.getValue() != null) {
+						 searchTeam();
+					 }
+					 if(!this.position.getValue().equals("-") && this.position.getValue() != null) {
+						 searchPosition();
+					 }
 				 }
 				 else {
 					 if(this.results.isEmpty() || (this.teams.getValue() == null || this.teams.getValue().equals("-")) && (this.position.getValue() == null || this.position.getValue().equals("-"))) {
@@ -148,6 +166,15 @@ public class workingController {
 					 this.printArea.clear();
 					 this.results.clear();
 				 } 
+				 else if(value.equals("-") && (!this.age.getValue().equals("-") || this.age.getValue() != null || this.teams.getValue().equals("-") || this.teams.getValue() != null)) {
+					 this.printArea.clear();
+					 if(!this.teams.getValue().equals("-") && this.teams.getValue() != null) {
+						 searchTeam();
+					 }
+					 if(!this.age.getValue().equals("-") && this.age.getValue() != null) {
+						 searchAge();
+					 }
+				 }
 				 else {
 					 if(this.results.isEmpty() || (this.age.getValue() == null || this.age.getValue().equals("-")) && (this.teams.getValue() == null || this.teams.getValue().equals("-"))) {
 						 this.results = this.q.searchByPosition(value);
